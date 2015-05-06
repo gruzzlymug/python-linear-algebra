@@ -5,6 +5,9 @@ __pycache__/
 # Coursera
 coursera_submit.py
 
+# Vim
+.*.swp
+
 # C extensions
 *.so
 
