@@ -22,8 +22,7 @@ def tuple_sum(A, B):
     >>> tuple_sum([(0,1),(-1,0),(2,2)], [(3,4),(5,6),(7,8)])
     [(3, 5), (4, 6), (9, 10)]
     '''
-    print('test')
-    pass
+    return [(a[0]+b[0],a[1]+b[1]) for (a,b) in zip(A,B)]
 
 
 
@@ -38,7 +37,7 @@ def inv_dict(d):
     Example:
     >>> inv_dict({'goodbye':  'au revoir', 'thank you': 'merci'}) == {'merci':'thank you', 'au revoir':'goodbye'}
     '''
-    pass
+    return {d[k]:k for k in d}
 
 
 
@@ -54,11 +53,11 @@ def row(p, n):
     >>> row(10,4)
     [10, 11, 12, 13]
     '''
-    pass
+    return [p+i for i in range(n)]
 
 comprehension_with_row = ...
 
-comprehension_without_row = ...
+comprehension_without_row = [[i+j for i in range(20)] for j in range(15)]
 
 
 
