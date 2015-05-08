@@ -55,19 +55,19 @@ def row(p, n):
     '''
     return [p+i for i in range(n)]
 
-comprehension_with_row = ...
+comprehension_with_row = [row(i,20) for i in range(15)]
 
 comprehension_without_row = [[i+j for i in range(20)] for j in range(15)]
 
 
 
 ## 4: (Problem 4) Probability Exercise 1
-Pr_f_is_even = ...
-Pr_f_is_odd  = ...
+Pr_f_is_even = 0.7
+Pr_f_is_odd  = 0.3
 
 
 
 ## 5: (Problem 5) Probability Exercise 2
-Pr_g_is_1    = ...
-Pr_g_is_0or2 = ...
+Pr_g_is_1    = 0.4
+Pr_g_is_0or2 = 0.6
 
