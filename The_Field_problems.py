@@ -20,7 +20,7 @@ def myFilter(L, num):
       >>> myFilter([10,15,20,25],10)
       [15, 25]
     '''
-    pass
+    return [x for x in L if x % num != 0] 
 
 
 
@@ -33,7 +33,7 @@ def my_lists(L):
     >>> my_lists([0,3])
     [[], [1, 2, 3]]
     '''
-    pass
+    return [[i+1 for i in range(j)] for j in L]
 
 
 
@@ -56,7 +56,7 @@ def myFunctionComposition(f, g):
       >>> myFunctionComposition(a,b) == {'x':'twentyfour','y':'twentyfive'}
       True
     '''
-    pass
+    return {k:g[f[k]] for k in f.keys()}
 
 
 
@@ -74,7 +74,10 @@ Be sure your procedure works for the empty list.
       >>> mySum([3,5,10])
       18
     '''
-    pass
+    current = 0
+    for x in L:
+        current += x
+    return current
 
 
 
@@ -92,7 +95,10 @@ Be sure your procedure works for the empty list.
       >>> myProduct([-3,2,4])
       -24
     '''
-    pass
+    current = 1
+    for x in L:
+        current *= x
+    return current
 
 
 
@@ -111,7 +117,11 @@ Hint: The value of the Python expression float('infinity') is infinity.
     >>> myMin([0,3,5,-2,-5])
     -5
     '''
-    pass
+    current = L.pop()
+    for x in L:
+        if x < current:
+            current = x
+    return current
 
 
 
@@ -129,7 +139,10 @@ Be sure your procedure works for the empty list.
     >>> myConcat(['what','is','up'])
     'whatisup'
     '''
-    pass
+    current = ''
+    for x in L:
+        current += x
+    return current
 
 
 
@@ -147,7 +160,10 @@ Be sure your procedure works for the empty list.
     >>> myUnion([set(),{3,5},{3,5}])
     {3, 5}
     '''
-    pass
+    current = set()
+    for x in L:
+        current = current.union(x)
+    return current
 
 
 
