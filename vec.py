@@ -64,7 +64,13 @@ def equal(u,v):
 
     """
     assert u.D == v.D
-    return u.f == v.f
+    for ku in u.f:
+        if u.f.get(ku, 0) != v.f.get(ku, 0):
+            return False
+    for kv in v.f:
+        if v.f.get(kv, 0) != u.f.get(kv, 0):
+            return False
+    return True
 
 def add(u,v):
     """
@@ -90,7 +96,10 @@ def add(u,v):
     True
     """
     assert u.D == v.D
-    return Vec(u.D, u.f | v.f)
+    f = u.f.copy()
+    for k in v.f:
+        f[k] = v.f[k] + f.get(k, 0)
+    return Vec(u.D, f)
 
 def dot(u,v):
     """
@@ -121,7 +130,10 @@ def dot(u,v):
     12
     """
     assert u.D == v.D
-    pass
+    d = 0
+    for k in u.f:
+        d += u.f[k] * v.f.get(k, 0)
+    return d
 
 def scalar_mul(v, alpha):
     """
