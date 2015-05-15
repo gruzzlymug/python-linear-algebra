@@ -39,7 +39,16 @@ def create_voting_dict(strlist):
     The lists for each senator should preserve the order listed in voting data.
     In case you're feeling clever, this can be done in one line.
     """
-    pass
+    vd = {}
+    for i in strlist:
+        rec = i.split()
+        name = rec.pop(0)
+        # party and state are not used
+        party = rec.pop(0)
+        state = rec.pop(0)
+        rn = [int(n) for n in rec]
+        vd[name] = rn
+    return vd
 
 
 
@@ -61,7 +70,7 @@ def policy_compare(sen_a, sen_b, voting_dict):
         
     You should definitely try to write this in one line.
     """
-    pass
+    return sum([a*b for (a, b) in zip(voting_dict[sen_a], voting_dict[sen_b])])
 
 
 
@@ -85,8 +94,15 @@ def most_similar(sen, voting_dict):
 
     Note that you can (and are encouraged to) re-use your policy_compare procedure.
     """
-    
-    return ""
+    ms_score = -1 * len(voting_dict[sen])
+    ms_name = 'nobody'
+    for k in voting_dict.keys():
+        if k != sen:
+            new_score = policy_compare(sen, k, voting_dict)
+            if new_score > ms_score:
+                ms_score = new_score
+                ms_name = k
+    return ms_name
 
 
 
@@ -107,13 +123,21 @@ def least_similar(sen, voting_dict):
         >>> least_similar('c', vd)
         'b'
     """
-    pass
+    ms_score = len(voting_dict[sen])
+    ms_name = 'nobody'
+    for k in voting_dict.keys():
+        if k != sen:
+            new_score = policy_compare(sen, k, voting_dict)
+            if new_score < ms_score:
+                ms_score = new_score
+                ms_name = k
+    return ms_name
 
 
 
 ## 5: (Task 2.12.5) Chafee, Santorum
-most_like_chafee    = ''
-least_like_santorum = '' 
+most_like_chafee    = 'Jeffords'
+least_like_santorum = 'Feingold'
 
 
 
