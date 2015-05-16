@@ -52,6 +52,18 @@ def create_voting_dict(strlist):
 
 
 
+def get_party_list(desired_party, strlist):
+    party_list = []
+    for i in strlist:
+        rec = i.split()
+        name = rec.pop(0)
+        party = rec.pop(0)
+        if party == desired_party:
+            party_list.append(name)
+    return party_list
+
+
+
 ## 2: (Task 2.12.2) Policy Compare
 def policy_compare(sen_a, sen_b, voting_dict):
     """
