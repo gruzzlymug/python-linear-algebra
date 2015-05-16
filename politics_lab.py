@@ -52,18 +52,6 @@ def create_voting_dict(strlist):
 
 
 
-def get_party_list(desired_party, strlist):
-    party_list = []
-    for i in strlist:
-        rec = i.split()
-        name = rec.pop(0)
-        party = rec.pop(0)
-        if party == desired_party:
-            party_list.append(name)
-    return party_list
-
-
-
 ## 2: (Task 2.12.2) Policy Compare
 def policy_compare(sen_a, sen_b, voting_dict):
     """
@@ -153,6 +141,18 @@ least_like_santorum = 'Feingold'
 
 
 
+def create_party_list(desired_party, strlist):
+    party_list = []
+    for i in strlist:
+        rec = i.split()
+        name = rec.pop(0)
+        party = rec.pop(0)
+        if party == desired_party:
+            party_list.append(name)
+    return party_list
+
+
+
 ## 6: (Task 2.12.7) Most Average Democrat
 def find_average_similarity(sen, sen_set, voting_dict):
     """
@@ -168,9 +168,28 @@ def find_average_similarity(sen, sen_set, voting_dict):
         >>> vd == {'Klein':[1,1,1], 'Fox-Epstein':[1,-1,0], 'Ravella':[-1,0,0], 'Oyakawa':[-1,-1,-1], 'Loery':[0,1,1]}
         True
     """
-    return ...
+    num_sens = len(sen_set)
+    sen_list = [voting_dict[sk] for sk in sen_set]
+    avgs = [sum(col)/num_sens for col in zip(*sen_list)]
 
-most_average_Democrat = ... # give the last name (or code that computes the last name)
+    sim = sum([a*b for a,b in zip(voting_dict[sen], avgs)])
+    return sim
+
+
+# returns the member closest to the party average
+# member = most_average_member('D', strlist)
+def find_most_average_member(party, strlist):
+    vd = create_voting_dict(strlist)
+    pl = create_party_list(party, strlist)
+    scores = {}
+    for member in pl:
+        # NOTE the average is recalculated for each call...TERRIBLY INEFFICIENT
+        scores[member] = find_average_similarity(member, pl, vd)
+    return max(scores.keys(), key=lambda member: scores[member])
+
+
+
+most_average_Democrat = 'Biden'
 
 
 
