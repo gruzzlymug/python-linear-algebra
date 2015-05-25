@@ -46,8 +46,6 @@ def vec_select_sum(veclist, k, D):
     vecs = vec_select(veclist, k)
     sums = vec_sum(vecs, D)
     return sums
-    pass
-
 
 
 ## 2: (Problem 2) Vector Dictionary
@@ -61,7 +59,7 @@ def scale_vecs(vecdict):
     >>> [v in [Vec({1,2,4},{2: 3.0}), Vec({1,2,4},{1: 0.2, 2: 0.4, 4: 1.6})] for v in result]
     [True, True]
     '''
-    pass
+    return [Vec(vec.D, {key:vec.f[key]/factor for key in vec.f.keys()}) for (factor, vec) in vecdict.items()]
 
 
 
