@@ -61,9 +61,15 @@ def scale_vecs(vecdict):
     '''
     return [Vec(vec.D, {key:vec.f[key]/factor for key in vec.f.keys()}) for (factor, vec) in vecdict.items()]
 
-
+def span_builder(v, s):
+    nt = set()
+    for v1 in s:
+        nt.add(Vec(v.D, v1.f))
+        nt.add(Vec(v.D, {k:v1.f.get(k,0)+v.f.get(k,0) for k in v.D}))
+    return nt
 
 ## 3: (Problem 3) Constructing span of given vectors over GF(2)
+# TODO find a more elegant solution
 def GF2_span(D, S):
     '''
     >>> from GF2 import one
@@ -80,8 +86,14 @@ def GF2_span(D, S):
     >>> S == {Vec({0, 1},{1: one}), Vec({0, 1},{0: one})}
     True
     '''
-    pass
+    from GF2 import one
+    result = set()
+    result.add(Vec(D, {}))
 
+    for v in S:
+        result = span_builder(v, result)
+
+    return result
 
 
 ## 4: (Problem 4) Is it a vector space 1
