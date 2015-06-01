@@ -62,14 +62,14 @@ def scale_vecs(vecdict):
     return [Vec(vec.D, {key:vec.f[key]/factor for key in vec.f.keys()}) for (factor, vec) in vecdict.items()]
 
 def span_builder(v, s):
-    nt = set()
-    for v1 in s:
-        nt.add(Vec(v.D, v1.f))
-        nt.add(Vec(v.D, {k:v1.f.get(k,0)+v.f.get(k,0) for k in v.D}))
+    nt = set(s)
+
+    for ov in s:
+        nt.add(Vec(v.D, {k:ov.f.get(k,0)+v.f.get(k,0) for k in v.D}))
+    
     return nt
 
 ## 3: (Problem 3) Constructing span of given vectors over GF(2)
-# TODO find a more elegant solution
 def GF2_span(D, S):
     '''
     >>> from GF2 import one
@@ -87,8 +87,7 @@ def GF2_span(D, S):
     True
     '''
     from GF2 import one
-    result = set()
-    result.add(Vec(D, {}))
+    result = { Vec(D, {}) }
 
     for v in S:
         result = span_builder(v, result)
@@ -98,24 +97,24 @@ def GF2_span(D, S):
 
 ## 4: (Problem 4) Is it a vector space 1
 # Answer with a boolean, please.
-is_a_vector_space_1 = ...
+is_a_vector_space_1 = False
 
 
 
 ## 5: (Problem 5) Is it a vector space 2
 # Answer with a boolean, please.
-is_a_vector_space_2 = ...
+is_a_vector_space_2 = True
 
 
 
 ## 6: (Problem 6) Is it a vector space 3
 # Answer with a boolean, please.
-is_a_vector_space_3 = ...
+is_a_vector_space_3 = False
 
 
 
 ## 7: (Problem 7) Is it a vector space 4
 # Answer with a boolean, please.
-is_a_vector_space_4a = ...
-is_a_vector_space_4b = ...
+is_a_vector_space_4a = True
+is_a_vector_space_4b = False
 
